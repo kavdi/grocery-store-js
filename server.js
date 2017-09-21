@@ -36,7 +36,7 @@ Desired Functionality
 - add new groceries to store -- DONE
 - list all groceries in the store -- DONE
 - list all groceries in a category
-- show the detail for one grocery
+- show the detail for one grocery -- DONE
 - update the groceries in the store
 - remove groceries from my store
 */
@@ -104,7 +104,7 @@ APP.get('/api/inventory/:name([a-zA-Z]+)', function(request, response){
     });
 });
 
-APP.get('/api/inventory/:id(\d+)', function(request, response){
+APP.get('/api/inventory/:id([0-9]+)', function(request, response){
   CLIENT.query(`SELECT * FROM inventory WHERE id=$1;`, [request.params.id])
     .then(function(result){
       response.send(result.rows);
@@ -115,6 +115,25 @@ APP.get('/api/inventory/:id(\d+)', function(request, response){
     });
 });
 
+/* update the groceries in the store */
+APP.put('/api/inventory/:id', function(request, response){
+  console.log(request.body);
+  CLIENT.query(`UPDATE inventory
+    SET name=$2, category=$3, quantity=$4, price=$5
+    WHERE id=$1;`, [
+      request.params.id,
+      request.body.name,
+      request.body.category,
+      request.body.quantity,
+      request.body.price
+    ])
+    .then(function(){
+      response.send('Your item has been updated!');
+    })
+    .catch(function(err){
+      console.error(err);
+    });
+});
 
 APP.listen(PORT, function(){
   console.log(`Listening on port ${ PORT }`);
