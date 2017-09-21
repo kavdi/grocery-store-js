@@ -9,7 +9,7 @@
       <li>{{ name }} | {{ category }} | ${{ price }} | {{ quantity }} | <a href="#" item-id="{{ id }}" class="more">See More</a></li>
     </script>
     <script id="item-template" type="text/x-handlebars-template">
-      <p>{{ name }} | {{ category }} | ${{ price }} | {{ quantity }} | <a href="#" id="{{ id }}" class="update">Update</a></p>
+      <p>{{ name }} | {{ category }} | ${{ price }} | {{ quantity }} | <a href="#" id="{{ id }}" class="update">Update</a><a href="#" data-id="{{ id }}" class="delete">Remove this item</a></p>
     </script>
   </head>
   <body>
