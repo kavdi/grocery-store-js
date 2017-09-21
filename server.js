@@ -24,10 +24,11 @@ APP.get('/', function(request, response){
   response.sendFile('index.html', {root: './public'});
 });
 
-APP.listen(PORT, function(){
-  console.log(`Listening on port ${ PORT }`);
-});
-
 const DATABASE_LOCATION = process.env.DATABASE_URL || 'postgres://localhost:5432/groceries';
 const CLIENT = new PG.Client(DATABASE_LOCATION);
 CLIENT.connect();
+
+
+APP.listen(PORT, function(){
+  console.log(`Listening on port ${ PORT }`);
+});
