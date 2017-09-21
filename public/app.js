@@ -52,7 +52,7 @@ $('#show-inventory').on('click', function(){
     let compiled = Handlebars.compile($theTemplate);
     for (var i = 0; i < response.length; i++) {
       let $theHTML = $(compiled(response[i]));
-      $theHTML.find('a').on('click', seeMore);
+      $theHTML.find('.more').on('click', seeMore);
       $('#inventory ul').append($theHTML);
     }
   });
@@ -75,7 +75,8 @@ function seeMore(){
     let $theTemplate = $('#item-template').html();
     let compiled = Handlebars.compile($theTemplate);
     let $thePtag = $(compiled(theItem));
-    $thePtag.find('a').on('click', function(){
+    $thePtag.find('.delete').on('click', deleteItem);
+    $thePtag.find('.update').on('click', function(){
       $form.show();
       $form.attr('doing', 'update');
       $form.find('[name="id"]').val(theItem.id);
@@ -87,4 +88,11 @@ function seeMore(){
       // append that template to somewhere in the DOM
     $('#one-item').append($thePtag);
   });
+}
+
+function deleteItem() {
+  $.ajax({
+    method: 'DELETE',
+    url: `/api/inventory/${ $(this).attr('data-id') }`
+  })
 }
