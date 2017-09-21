@@ -1,0 +1,16 @@
+{
+  "name": "grocery-store",
+  "version": "1.0.0",
+  "description": "This is a grocery store",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "seattle301-d24",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "pg": "^7.3.0"
+  }
+}
